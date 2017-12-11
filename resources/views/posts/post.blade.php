@@ -25,9 +25,18 @@
       <td>{{$employee->lastname}}</td>
       <td>{{$employee->position}}</td>
       <td>
+        <col class="md-12">
         <a href="{{ url('/') }}" class="btn btn-primary"> Back </a>
         <a href="{{ url('') }}" class="btn btn-success"> Update </a>
-        <a href="{{ url('') }}" class="btn btn-danger"> Delete </a>
+      
+        {!! Form::open(['action'=>['PostsController@destroy',$row->id],'method'=>'POST']) !!}
+          {{ Form::hidden('_method','DELETE') }}
+
+          {{ Form::submit('Delete',['class'=> 'btn btn-danger inline',]) }}
+
+        {!! Form::close() !!}
+
+      </col>
       </td>
     </tr>
 

@@ -81,7 +81,12 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = array(
+            'title'=>'Edit Employee',
+            'employee'=>$employee = Employee::find($id)
+            );
+        return view('posts.edit')->with($data);
+
     }
 
     /**
@@ -93,7 +98,22 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $this->validate($request,[
+            'firstname'=>'required',
+            'lastname'=> 'required',
+            'position'=> 'required'
+            ]);
+
+
+        $emp = Employee::find($id);
+        $emp->firstname = $request->input('firstname');
+        $emp->lastname = $request->input('lastname');
+        $emp->position = $request->input('position');
+
+        $emp->save();
+
+        return redirect('/')->with('success','Employee Updated');
     }
 
     /**
@@ -104,6 +124,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        'HALA noh '.$id;
     }
 }

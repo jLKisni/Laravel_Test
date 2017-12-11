@@ -3,7 +3,8 @@
 
 @section('content')
 <div class="container">
-
+  @include('layouts.messages')
+  <br><br>
 	<h2>Tables</h2>
 
 
@@ -24,13 +25,31 @@
     
     <tr class="table-info">
       <td>#{{$row->id}}</td>
-      <td>{{$row->firstname}}</td>
+      <td><?php echo ucfirst($row->firstname)?></td>
       <td>{{$row->lastname}}</td>
       <td>{{$row->position}}</td>
       <td>
-        <a href="{{ url('posts') }}/{{$row->id }}" class="btn btn-primary"> View </a>
-        <a href="{{ url('') }}" class="btn btn-success"> Update </a>
-        <a href="{{ url('') }}" class="btn btn-danger"> Delete </a>
+
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-3">
+            <a href="{{ url('posts') }}/{{$row->id }}" class="btn btn-primary"> View </a>
+            </div>
+
+            <div class="col-md-3">
+            <a href="/posts/{{$row->id}}/edit" class="btn btn-success"> Update </a>
+            </div>
+
+            <div class="col-md-3">
+        {!! Form::open(['action'=>['PostsController@destroy',$row->id],'method'=>'POST']) !!}
+          {{ Form::hidden('_method','DELETE') }}
+
+          {{ Form::submit('Delete',['class'=> 'btn btn-danger']) }}
+
+        {!! Form::close() !!}
+            </div>
+        </div>
+       </div>
       </td>
     </tr>
     

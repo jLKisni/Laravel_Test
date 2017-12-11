@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+@include('layouts.messages')
+
+<br><br>
+
 
 	<h2>Tables</h2>
 
@@ -27,7 +31,7 @@
       <td>{{$row->lastname}}</td>
       <td>{{$row->position}}</td>
       <td>
-        <a href="{{ url('') }}" class="btn btn-primary"> View </a>
+        <a href="{{ url('/') }}" class="btn btn-primary"> View </a>
         <a href="{{ url('') }}" class="btn btn-success"> Update </a>
         <a href="{{ url('') }}" class="btn btn-danger"> Delete </a>
       </td>
